@@ -1,4 +1,3 @@
-// Checkpoint A — your work goes in this file.
 
 import { findAllOrders, findOrderById } from "./orders-db.js";
 
@@ -20,13 +19,12 @@ export async function describeOrder(id) {
   try {
     const order = await findOrderById(id);
     return `${order.item} x${order.quantity} ordered by ${order.student}`;
-  } catch (error) {
+  } catch {
     return `Order ${id} not found`;
   }
 }
 
 export function toJsonLines(orders) {
-  return JSON.stringify(
-    orders.map((order) => ({ item: order.item, price: order.price }))
-  );
+  const items = orders.map(({ item, price }) => ({ item, price }));
+  return JSON.stringify(items);
 }
